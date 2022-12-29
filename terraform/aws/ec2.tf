@@ -1,11 +1,11 @@
 resource "aws_instance" "web_host" {
   # ec2 have plain text secrets in user data
-  ami           = "${var.ami}"
-  instance_type = "t2.nano"
+  ami           = "${var.ami}" 
+  instance_type = "t2.nano" 
 
   vpc_security_group_ids = [
   "${aws_security_group.web-node.id}"]
-  subnet_id = "${aws_subnet.web_subnet.id}"
+  subnet_id = "${aws_subnet.web_subnet.id}" 
   user_data = <<EOF
 #! /bin/bash
 sudo apt-get update
@@ -21,8 +21,8 @@ EOF
     Name = "${local.resource_prefix.value}-ec2"
     }, {
     git_commit           = "d68d2897add9bc2203a5ed0632a5cdd8ff8cefb0"
-    git_file             = "terraform/aws/ec2.tf"
-    git_last_modified_at = "2020-06-16 14:46:24"
+    git_file             = "terraform/aws/ec2.tf" 
+    git_last_modified_at = "2020-06-16 14:46:24" 
     git_last_modified_by = "nimrodkor@gmail.com"
     git_modifiers        = "nimrodkor"
     git_org              = "bridgecrewio"
@@ -55,7 +55,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
   tags = merge({
-    Name = "${local.resource_prefix.value}-ebs-snapshot"
+    Name = "${local.resource_prefix.value}-ebs-snapshot" 
     }, {
     git_commit           = "d68d2897add9bc2203a5ed0632a5cdd8ff8cefb0"
     git_file             = "terraform/aws/ec2.tf"
@@ -76,7 +76,7 @@ resource "aws_volume_attachment" "ebs_att" {
 
 resource "aws_security_group" "web-node" {
   # security group is open to the world in SSH port
-  name        = "${local.resource_prefix.value}-sg"
+  name        = "${local.resource_prefix.value}-sg" 
   description = "${local.resource_prefix.value} Security Group"
   vpc_id      = aws_vpc.web_vpc.id
 
@@ -109,7 +109,7 @@ resource "aws_security_group" "web-node" {
     git_last_modified_by = "nimrodkor@gmail.com"
     git_modifiers        = "nimrodkor"
     git_org              = "bridgecrewio"
-    git_repo             = "terragoat"
+    git_repo             = "terragoat" 
     yor_trace            = "b7af1b40-64eb-4519-a1a0-ab198db4b193"
   }
 }
@@ -139,7 +139,7 @@ resource "aws_subnet" "web_subnet" {
   map_public_ip_on_launch = true
 
   tags = merge({
-    Name = "${local.resource_prefix.value}-subnet"
+    Name = "${local.resource_prefix.value}-subnet" 
     }, {
     git_commit           = "6e62522d2ab8f63740e53752b84a6e99cd65696a"
     git_file             = "terraform/aws/ec2.tf"
@@ -213,7 +213,7 @@ resource "aws_route_table_association" "rtbassoc" {
 }
 
 resource "aws_route_table_association" "rtbassoc2" {
-  subnet_id      = aws_subnet.web_subnet2.id
+  subnet_id      = aws_subnet.web_subnet2.id 
   route_table_id = aws_route_table.web_rtb.id
 }
 
@@ -281,8 +281,8 @@ resource "aws_s3_bucket" "flowbucket" {
     git_last_modified_at = "2020-06-16 14:46:24"
     git_last_modified_by = "nimrodkor@gmail.com"
     git_modifiers        = "nimrodkor"
-    git_org              = "bridgecrewio"
-    git_repo             = "terragoat"
+    git_org              = "bridgecrewio" 
+    git_repo             = "terragoat" 
     yor_trace            = "f058838a-b1e0-4383-b965-7e06e987ffb1"
   })
 }
